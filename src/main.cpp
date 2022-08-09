@@ -10,6 +10,9 @@
 
 #include "SDL.h"
 #include "constants.h"
+#include "ProgramState.h"
+#include "Image.h"
+#include "app.h"
 
 /**
  * @brief Main event loop
@@ -17,9 +20,10 @@
  * Polls and responds to SDL events
  *
  * @param[in] renderer The SDL_Renderer for the window
+ * @param[in] app The core app logic handle
  * @param[out] done Boolean flag, set to true to signal the program to exit.
  */
-void tickFrame(const SDL_Renderer* renderer, SDL_bool* done) {
+void tickFrame(const SDL_Renderer* renderer, App* app, SDL_bool* done) {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
@@ -29,6 +33,21 @@ void tickFrame(const SDL_Renderer* renderer, SDL_bool* done) {
                 break;
         }
     }
+
+    SDL_RenderClear((SDL_Renderer*) renderer);
+    app->OnUpdate(1);
+    SDL_RenderPresent((SDL_Renderer*) renderer);
+}
+
+/**
+ * Initializes the program state to be shared among other
+ * library classes.
+ *
+ * @param[out] state ProgramState to assign the renderer to
+ * @param[in] renderer SDL_Renderer to be used by other classes
+ */
+void initializeProgramState(ProgramState* state, const SDL_Renderer* renderer) {
+    state->SetRenderer(renderer);
 }
 
 /**
@@ -42,8 +61,6 @@ void tickFrame(const SDL_Renderer* renderer, SDL_bool* done) {
 int main() {
     /* Enable standard application logging */
     SDL_LogSetPriority(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO);
-
-    SDL_Delay(2000);
 
     // Initialize SDL
     if(SDL_VideoInit(NULL) == -1) {
@@ -65,11 +82,22 @@ int main() {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create renderer: %s\n", SDL_GetError());
     }
 
+    // Initialize library classes with shared SDL data.
+    ProgramState state;
+    initializeProgramState(&state, renderer);
+    Image::SetRenderer(renderer);
+
+    // Now that libraries have been initialized, begin the app startup code.
+    App app;
+    app.OnStartup();
 
     SDL_bool done = SDL_FALSE;
     while (!done) {
-        tickFrame(renderer, &done);
+        tickFrame(renderer, &app, &done);
     }
+
+    // Shutdown the application code before shutting down SDL.
+    app.OnShutdown();
 
     if (renderer != NULL) {
         SDL_DestroyRenderer(renderer);
