@@ -16,6 +16,16 @@
  * it doesn't need to know your application's specific class name. It will
  * always create an instance of App, which will load your defined implementation
  * of it.
+ *
+ * This design is loosely based on cocos2d-x. In that framework, you implement
+ * scenes which follow a similar structure of this App class. Though this framework
+ * is not as sophisticated as cocos2d-x, so this App actually represents your entire
+ * program. Any scene definitions should be created by you by controlling what happens
+ * in your update function.
+ *
+ * One thing you may do is create several smaller "apps" of your own design, then
+ * maintain a state in the App core. When the state changes, you may run one of your own
+ * sub apps, thus creating different rooms/scenes/screens etc.
  */
 
 /**
