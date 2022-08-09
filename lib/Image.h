@@ -9,6 +9,18 @@
  *
  * When the Image is constructed, it opens the given filename into
  * a texture and stores the width and height of the image.
+ *
+ * @section Sprite Sheets
+ *
+ * It's common to have many sprites stored in a single image as
+ * a sprite sheet to save memory. This framework supports using
+ * sprite sheets as an image source by using the Image class and
+ * passing in an SDL_Rect to target a specific rectangle in the
+ * sprite sheet.
+ *
+ * All images are cached, so you can use this method to select
+ * multiple images from the sprite sheet and the sprite sheet
+ * will only be stored in a single texture in memory.
  */
 
 #include "SDL.h"
@@ -24,19 +36,16 @@ public:
     Image(const char* filename);
 
     /**
-     * Image destructor, frees the stored texture.
+     * Creates an image from the given file using the given
+     * subsection. This can be used to target a specific sprite
+     * in a sprite sheet.
      */
-    ~Image();
+    Image(const char* filename, SDL_Rect subsection);
 
     /**
-     * Sets the Image Renderer to be used to load images
+     * Draws the Image to the screen
      */
-    static void SetRenderer(SDL_Renderer* renderer);
-
-    /**
-     * Draws the Image to the given coordinates in the window
-     */
-    void Draw(int x, int y);
+    void Draw();
 
     /**
      * SDL Texture initialized via the constructor
@@ -53,11 +62,22 @@ public:
      */
     int height = 0;
 
+    /**
+     * X Position in the window
+     */
+    int x = 0;
+
+    /**
+     * Y Position in the window
+     */
+    int y = 0;
+
 private:
     /**
-     * The program's renderer retrieved from the window
+     * Targets a specific rectangle in the texture to render.
+     * This is used for targeting a single sprite in a sprite sheet.
      */
-    static SDL_Renderer* renderer;
+    SDL_Rect _textureSubMap {0, 0, 1, 1};
 
     /**
      * Returns an SDL_Rect for the given image.

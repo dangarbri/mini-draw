@@ -1,10 +1,12 @@
 #include "ProgramState.h"
 
-void ProgramState::SetRenderer(const SDL_Renderer* renderer) {
+SDL_Renderer* ProgramState::_renderer = nullptr;
+
+void ProgramState::SetRenderer(SDL_Renderer* renderer) {
     _renderer = renderer;
 }
 
-const SDL_Renderer* ProgramState::GetRenderer() {
+SDL_Renderer* ProgramState::GetRenderer() {
     return _renderer;
 }
 

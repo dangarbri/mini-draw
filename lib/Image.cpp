@@ -1,40 +1,32 @@
 #include "Image.h"
-#include "SDL_image.h"
-
-SDL_Renderer* Image::renderer = nullptr;
+#include "TextureCache.h"
+#include "ProgramState.h"
 
 Image::Image(const char* filename) {
     /* Open the image file */
-    texture = IMG_LoadTexture(Image::renderer, filename);
-    if (!texture) {
-        SDL_Log("Couldn't load %s: %s\n", filename, SDL_GetError());
-    } else {
+    texture = TextureCache::getInstance()->getTexture(filename);
+    if (texture) {
         SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+        _textureSubMap = SDL_Rect {0, 0, width, height};
     }
 }
 
-Image::~Image() {
-    if (texture != nullptr) {
-        SDL_DestroyTexture(texture);
-    }
+Image::Image(const char* filename, SDL_Rect subsection) {
+    /* Open the image file */
+    texture = TextureCache::getInstance()->getTexture(filename);
+    _textureSubMap = subsection;
 }
 
-void Image::SetRenderer(SDL_Renderer* renderer) {
-    Image::renderer = renderer;
-}
-
-void Image::Draw(int x, int y) {
+void Image::Draw() {
     SDL_Rect srcRect = _GetRect();
-    SDL_Rect targetRect = _GetRect();
-    targetRect.x = x;
-    targetRect.y = y;
-    int result = SDL_RenderCopy(Image::renderer, texture, &srcRect, &targetRect);
+    SDL_Rect targetRect = SDL_Rect {x, y, width, height};
+    int result = SDL_RenderCopy(ProgramState::GetRenderer(), texture, &srcRect, &targetRect);
     if (result < 0) {
         SDL_Log("Failed to render image: %s\n", SDL_GetError());
     }
 }
 
 SDL_Rect Image::_GetRect() {
-    return SDL_Rect{0, 0, width, height};
+    return _textureSubMap;
 }
 

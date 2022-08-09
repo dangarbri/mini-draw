@@ -12,6 +12,7 @@
 #include "constants.h"
 #include "ProgramState.h"
 #include "Image.h"
+#include "TextureCache.h"
 #include "app.h"
 
 /**
@@ -23,7 +24,7 @@
  * @param[in] app The core app logic handle
  * @param[out] done Boolean flag, set to true to signal the program to exit.
  */
-void tickFrame(const SDL_Renderer* renderer, App* app, SDL_bool* done) {
+void tickFrame(SDL_Renderer* renderer, App* app, SDL_bool* done) {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
@@ -34,20 +35,19 @@ void tickFrame(const SDL_Renderer* renderer, App* app, SDL_bool* done) {
         }
     }
 
-    SDL_RenderClear((SDL_Renderer*) renderer);
+    SDL_RenderClear(renderer);
     app->OnUpdate(1);
-    SDL_RenderPresent((SDL_Renderer*) renderer);
+    SDL_RenderPresent(renderer);
 }
 
 /**
  * Initializes the program state to be shared among other
  * library classes.
  *
- * @param[out] state ProgramState to assign the renderer to
  * @param[in] renderer SDL_Renderer to be used by other classes
  */
-void initializeProgramState(ProgramState* state, const SDL_Renderer* renderer) {
-    state->SetRenderer(renderer);
+void initializeProgramState(SDL_Renderer* renderer) {
+    ProgramState::SetRenderer(renderer);
 }
 
 /**
@@ -83,9 +83,7 @@ int main() {
     }
 
     // Initialize library classes with shared SDL data.
-    ProgramState state;
-    initializeProgramState(&state, renderer);
-    Image::SetRenderer(renderer);
+    initializeProgramState(renderer);
 
     // Now that libraries have been initialized, begin the app startup code.
     App app;
@@ -98,6 +96,9 @@ int main() {
 
     // Shutdown the application code before shutting down SDL.
     app.OnShutdown();
+
+    // Cleanup all cached textures
+    TextureCache::getInstance()->Destroy();
 
     if (renderer != NULL) {
         SDL_DestroyRenderer(renderer);

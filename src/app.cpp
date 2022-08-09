@@ -13,7 +13,7 @@ void App::OnStartup() {
 
 void App::OnUpdate(float dt) {
     /** Put your frame update code here */
-    _impl->test->Draw(0, 0);
+    _impl->test->Draw();
 }
 
 void App::OnShutdown() {

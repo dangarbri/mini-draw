@@ -28,18 +28,18 @@ public:
      *
      * @param[in] renderer SDL_Renderer for the application's window
      */
-    void SetRenderer(const SDL_Renderer* renderer);
+    static void SetRenderer(SDL_Renderer* renderer);
 
     /**
      * Returns the application's SDL_Renderer
      *
      * @returns SDL_Renderer*
      */
-    const SDL_Renderer* GetRenderer();
+    static SDL_Renderer* GetRenderer();
 
 private:
     /**
      * Cached renderer from SetRenderer
      */
-    const SDL_Renderer* _renderer;
+    static SDL_Renderer* _renderer;
 };
