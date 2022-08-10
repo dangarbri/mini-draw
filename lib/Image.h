@@ -72,6 +72,11 @@ public:
      */
     int y = 0;
 
+    /**
+     * Scale of the image to make it larger or smaller
+     */
+    int scale = 1;
+
 private:
     /**
      * Targets a specific rectangle in the texture to render.

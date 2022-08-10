@@ -80,6 +80,8 @@ int main() {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
     if (renderer == NULL) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create renderer: %s\n", SDL_GetError());
+    } else {
+        SDL_RenderSetLogicalSize(renderer, APP_RESOLUTION_WIDTH, APP_RESOLUTION_HEIGHT);
     }
 
     // Initialize library classes with shared SDL data.
