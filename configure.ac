@@ -27,5 +27,6 @@ AC_CHECK_LIB([SDL2_image], [IMG_LoadTexture], [], [AC_MSG_ERROR(Missing library 
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile
-                 lib/Makefile])
+                 lib/Makefile
+                 lib/test/Makefile])
 AC_OUTPUT

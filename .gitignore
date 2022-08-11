@@ -14,3 +14,5 @@ stamp*
 src/another_game_attempt
 config.status
 config.log
+*~
+**/.dirstamp
