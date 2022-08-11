@@ -2,3 +2,15 @@ bin
 docs
 *.swp
 *.swo
+autom4te.cache
+config.h
+Makefile
+src/Makefile
+lib/Makefile
+**/.deps
+**/*.o
+**/*.a
+stamp*
+src/another_game_attempt
+config.status
+config.log
