@@ -24,11 +24,12 @@
  */
 
 #include "SDL.h"
+#include "Sprite.h"
 
 /**
  * Represents an image that can be drawn to the screen
  */
-class Image {
+class Image : public Sprite {
 public:
     /**
      * Creates an image from filename
@@ -51,31 +52,6 @@ public:
      * SDL Texture initialized via the constructor
      */
     SDL_Texture *texture = nullptr;
-
-    /**
-     * Image width
-     */
-    int width = 0;
-
-    /**
-     * Image height
-     */
-    int height = 0;
-
-    /**
-     * X Position in the window
-     */
-    int x = 0;
-
-    /**
-     * Y Position in the window
-     */
-    int y = 0;
-
-    /**
-     * Scale of the image to make it larger or smaller
-     */
-    int scale = 1;
 
 private:
     /**
