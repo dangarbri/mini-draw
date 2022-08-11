@@ -49,4 +49,9 @@ public:
      * Returns the target rectangle to render this sprite to.
      */
     SDL_Rect GetTargetRect();
+
+    /**
+     * Draws the sprite to the screen
+     */
+    virtual void Draw() = 0;
 };
