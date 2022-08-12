@@ -13,7 +13,7 @@ void App::OnStartup() {
     /** Put your initialization code here */
     _impl->test = new AnimatedImage("assets/0x72_DungeonTilesetII_v1.4.png", SDL_Rect{128, 100, 16, 28}, 4);
     _impl->test->SetFrameDelay(150);
-    _impl->test->SetPosition(110, 110);
+    _impl->test->SetPosition(120, 114);
     _impl->controller = new WASDMovement(_impl->test);
     _impl->controller->Disable();
 }
