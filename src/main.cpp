@@ -9,6 +9,7 @@
  */
 
 #include "SDL.h"
+#include "SDL_ttf.h"
 #include "constants.h"
 #include "ProgramState.h"
 #include "Image.h"
@@ -89,6 +90,7 @@ void initializeProgramState(SDL_Renderer* renderer) {
  * quits SDL and exits the program.
  */
 int main() {
+    SDL_bool init_success = SDL_TRUE;
     /* Enable standard application logging */
     SDL_LogSetPriority(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO);
 
@@ -105,39 +107,51 @@ int main() {
         0);
     if (window == NULL) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window: %s\n", SDL_GetError());
+        init_success = SDL_FALSE;
     }
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
     if (renderer == NULL) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create renderer: %s\n", SDL_GetError());
+        init_success = SDL_FALSE;
     } else {
         SDL_RenderSetLogicalSize(renderer, APP_RESOLUTION_WIDTH, APP_RESOLUTION_HEIGHT);
     }
 
-    // Initialize library classes with shared SDL data.
-    initializeProgramState(renderer);
-
-    // Now that libraries have been initialized, begin the app startup code.
-    App app;
-    app.OnStartup();
-
-    SDL_bool done = SDL_FALSE;
-    Uint32 last_tick = SDL_GetTicks();
-    while (!done) {
-        // Calculate delta time for each frame
-        Uint32 now = SDL_GetTicks();
-        Uint32 dt = now - last_tick;
-        // Call the frame tick
-        tickFrame(renderer, &app, dt, &done);
-        // Update last tick time for dt calculation
-        last_tick = now;
+    if (TTF_Init() < 0) {
+        SDL_Log("Couldn't initialize TTF: %s\n",SDL_GetError());
+        init_success = SDL_FALSE;
     }
 
-    // Shutdown the application code before shutting down SDL.
-    app.OnShutdown();
+    if (init_success) {
+        // Initialize library classes with shared SDL data.
+        initializeProgramState(renderer);
 
-    // Cleanup all cached textures
-    TextureCache::getInstance()->Destroy();
+        // Now that libraries have been initialized, begin the app startup code.
+        App app;
+        app.OnStartup();
+
+        SDL_bool done = SDL_FALSE;
+        Uint32 last_tick = SDL_GetTicks();
+        while (!done) {
+            // Calculate delta time for each frame
+            Uint32 now = SDL_GetTicks();
+            Uint32 dt = now - last_tick;
+            // Call the frame tick
+            tickFrame(renderer, &app, dt, &done);
+            // Update last tick time for dt calculation
+            last_tick = now;
+        }
+
+        // Shutdown the application code before shutting down SDL.
+        app.OnShutdown();
+
+        // Cleanup all cached textures
+        TextureCache::getInstance()->Destroy();
+    }
+
+    // Close font library
+    TTF_Quit();
 
     if (renderer != NULL) {
         SDL_DestroyRenderer(renderer);
