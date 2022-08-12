@@ -94,6 +94,16 @@ public:
      */
     void SetScale(float scale);
 
+    /**
+     * Apply a rotation to the sprite, in degrees
+     */
+    void SetRotation(float rotation);
+
+    /**
+     * Returns the current rotation in degrees
+     */
+    float GetRotation();
+
 protected:
     /**
      * Width of the sprite's target render box
@@ -119,4 +129,10 @@ protected:
      * Scale of the image to make it larger or smaller
      */
     float scale = 1;
+
+        
+    /**
+     * Amount to rotate the sprite, in degrees
+     */
+    float rotation = 0;
 };

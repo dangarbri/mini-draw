@@ -47,3 +47,11 @@ void Sprite::SetScale(float scale) {
     this->scale = scale;
 }
 
+void Sprite::SetRotation(float rotation) {
+    this->rotation = rotation;
+}
+
+float Sprite::GetRotation() {
+    return rotation;
+}
+
