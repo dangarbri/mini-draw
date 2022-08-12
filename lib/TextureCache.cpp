@@ -39,5 +39,13 @@ void TextureCache::Destroy() {
     for (auto const& pair : _cache) {
         SDL_DestroyTexture(pair.second);
     }
+
+    for (auto texture : _managed_textures) {
+        SDL_DestroyTexture(texture);
+    }
+}
+
+void TextureCache::AddTexture(SDL_Texture* texture) {
+    _managed_textures.push_back(texture);
 }
 

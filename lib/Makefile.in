@@ -105,7 +105,8 @@ am__v_AR_1 =
 libminidraw_a_AR = $(AR) $(ARFLAGS)
 libminidraw_a_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_libminidraw_a_OBJECTS = libminidraw_a-FontCache.$(OBJEXT) \
+am_libminidraw_a_OBJECTS = libminidraw_a-Text.$(OBJEXT) \
+	libminidraw_a-FontCache.$(OBJEXT) \
 	AppBuilder/libminidraw_a-WASDMovement.$(OBJEXT) \
 	libminidraw_a-Keyboard.$(OBJEXT) \
 	libminidraw_a-AnimatedImage.$(OBJEXT) \
@@ -135,6 +136,7 @@ am__depfiles_remade = ./$(DEPDIR)/libminidraw_a-AnimatedImage.Po \
 	./$(DEPDIR)/libminidraw_a-Keyboard.Po \
 	./$(DEPDIR)/libminidraw_a-ProgramState.Po \
 	./$(DEPDIR)/libminidraw_a-Sprite.Po \
+	./$(DEPDIR)/libminidraw_a-Text.Po \
 	./$(DEPDIR)/libminidraw_a-TextureCache.Po \
 	AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po
 am__mv = mv -f
@@ -319,7 +321,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 noinst_LIBRARIES = libminidraw.a
-libminidraw_a_SOURCES = FontCache.cpp AppBuilder/WASDMovement.cpp Keyboard.cpp AnimatedImage.cpp Image.cpp ProgramState.cpp Sprite.cpp TextureCache.cpp
+libminidraw_a_SOURCES = Text.cpp FontCache.cpp AppBuilder/WASDMovement.cpp Keyboard.cpp AnimatedImage.cpp Image.cpp ProgramState.cpp Sprite.cpp TextureCache.cpp
 libminidraw_a_CPPFLAGS = -I/usr/local/include/SDL2 -I/usr/include/SDL2 -D_REENTRANT
 AUTOMAKE_OPTIONS = subdir-objects
 SUBDIRS = test
@@ -387,6 +389,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-Keyboard.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-ProgramState.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-Sprite.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-Text.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-TextureCache.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po@am__quote@ # am--include-marker
 
@@ -411,6 +414,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+libminidraw_a-Text.o: Text.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminidraw_a-Text.o -MD -MP -MF $(DEPDIR)/libminidraw_a-Text.Tpo -c -o libminidraw_a-Text.o `test -f 'Text.cpp' || echo '$(srcdir)/'`Text.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libminidraw_a-Text.Tpo $(DEPDIR)/libminidraw_a-Text.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Text.cpp' object='libminidraw_a-Text.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libminidraw_a-Text.o `test -f 'Text.cpp' || echo '$(srcdir)/'`Text.cpp
+
+libminidraw_a-Text.obj: Text.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminidraw_a-Text.obj -MD -MP -MF $(DEPDIR)/libminidraw_a-Text.Tpo -c -o libminidraw_a-Text.obj `if test -f 'Text.cpp'; then $(CYGPATH_W) 'Text.cpp'; else $(CYGPATH_W) '$(srcdir)/Text.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libminidraw_a-Text.Tpo $(DEPDIR)/libminidraw_a-Text.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Text.cpp' object='libminidraw_a-Text.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libminidraw_a-Text.obj `if test -f 'Text.cpp'; then $(CYGPATH_W) 'Text.cpp'; else $(CYGPATH_W) '$(srcdir)/Text.cpp'; fi`
 
 libminidraw_a-FontCache.o: FontCache.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminidraw_a-FontCache.o -MD -MP -MF $(DEPDIR)/libminidraw_a-FontCache.Tpo -c -o libminidraw_a-FontCache.o `test -f 'FontCache.cpp' || echo '$(srcdir)/'`FontCache.cpp
@@ -728,6 +745,7 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/libminidraw_a-Keyboard.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-ProgramState.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-Sprite.Po
+	-rm -f ./$(DEPDIR)/libminidraw_a-Text.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-TextureCache.Po
 	-rm -f AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po
 	-rm -f Makefile
@@ -781,6 +799,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/libminidraw_a-Keyboard.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-ProgramState.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-Sprite.Po
+	-rm -f ./$(DEPDIR)/libminidraw_a-Text.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-TextureCache.Po
 	-rm -f AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po
 	-rm -f Makefile

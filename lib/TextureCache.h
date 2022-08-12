@@ -2,6 +2,7 @@
 
 #include "SDL.h"
 #include <map>
+#include <vector>
 
 /**
  * The texture cache is used to map filenames to textures
@@ -25,6 +26,11 @@ private:
      * The stored mapping of files to textures
      */
     std::map<const char*, SDL_Texture*> _cache;
+
+    /**
+     * Managed textures
+     */
+    std::vector<SDL_Texture*> _managed_textures;
 
     /**
      * Loads a texture
@@ -52,6 +58,12 @@ public:
      */
     SDL_Texture* getTexture(const char* filename);
 
+    /**
+     * Adds a texture to be managed (free'd) by the cache
+     *
+     * @param[in] texture Texture to be managed
+     */
+    void AddTexture(SDL_Texture* texture);
 
     /**
      * Frees all the textures stored in the cache. Use this on cleanup.
