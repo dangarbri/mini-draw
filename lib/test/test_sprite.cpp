@@ -4,6 +4,7 @@
 
 class TestSprite : public Sprite {
 public:
+    void Update(Uint32) {}
     void Draw() {}
     // Getters and Setters for accessing protected methods for test purposes
     int getX() { return x; }
