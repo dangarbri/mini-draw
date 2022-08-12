@@ -49,7 +49,7 @@ public:
      * @param[in] x horizontal position
      * @param[in] y vertical position
      */
-    void SetPosition(int x, int y);
+    void SetPosition(float x, float y);
 
     /**
      * Sets the coordinates for where to render the sprite
@@ -85,14 +85,14 @@ public:
     /**
      * Gets the sprite's scale
      */
-    int GetScale();
+    float GetScale();
 
     /**
      * Sets the sprite's scale
      *
      * @param[in] scale New sprite scale
      */
-    void SetScale(int scale);
+    void SetScale(float scale);
 
 protected:
     /**
@@ -108,15 +108,15 @@ protected:
     /**
      * The sprite's top left corner X position
      */
-    int x = 0;
+    float x = 0;
 
     /**
      * The sprite's top left corner Y position
      */
-    int y = 0;
+    float y = 0;
 
     /**
      * Scale of the image to make it larger or smaller
      */
-    int scale = 1;
+    float scale = 1;
 };
