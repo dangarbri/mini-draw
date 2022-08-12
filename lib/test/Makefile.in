@@ -85,7 +85,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-check_PROGRAMS = compiled/test_sprite$(EXEEXT)
+check_PROGRAMS = compiled/test_keyboard$(EXEEXT)
 subdir = lib/test
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -97,10 +97,10 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_compiled_test_sprite_OBJECTS = test_sprite.$(OBJEXT) \
-	../Sprite.$(OBJEXT)
-compiled_test_sprite_OBJECTS = $(am_compiled_test_sprite_OBJECTS)
-compiled_test_sprite_LDADD = $(LDADD)
+am_compiled_test_keyboard_OBJECTS = test_keyboard.$(OBJEXT) \
+	../Keyboard.$(OBJEXT)
+compiled_test_keyboard_OBJECTS = $(am_compiled_test_keyboard_OBJECTS)
+compiled_test_keyboard_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -116,8 +116,8 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ../$(DEPDIR)/Sprite.Po \
-	./$(DEPDIR)/test_sprite.Po
+am__depfiles_remade = ../$(DEPDIR)/Keyboard.Po \
+	./$(DEPDIR)/test_keyboard.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -132,8 +132,8 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(compiled_test_sprite_SOURCES)
-DIST_SOURCES = $(compiled_test_sprite_SOURCES)
+SOURCES = $(compiled_test_keyboard_SOURCES)
+DIST_SOURCES = $(compiled_test_keyboard_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -459,7 +459,10 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-compiled_test_sprite_SOURCES = test_sprite.cpp ../Sprite.cpp
+#check_PROGRAMS = compiled/test_sprite compiled/test_keyboard
+
+#compiled_test_sprite_SOURCES = test_sprite.cpp ../Sprite.cpp
+compiled_test_keyboard_SOURCES = test_keyboard.cpp ../Keyboard.cpp
 AM_CPPFLAGS = -I.. -I/usr/local/include/SDL2
 AM_LDFLAGS = -L..
 TESTS = $(check_PROGRAMS)
@@ -506,14 +509,14 @@ clean-checkPROGRAMS:
 ../$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) ../$(DEPDIR)
 	@: > ../$(DEPDIR)/$(am__dirstamp)
-../Sprite.$(OBJEXT): ../$(am__dirstamp) ../$(DEPDIR)/$(am__dirstamp)
+../Keyboard.$(OBJEXT): ../$(am__dirstamp) ../$(DEPDIR)/$(am__dirstamp)
 compiled/$(am__dirstamp):
 	@$(MKDIR_P) compiled
 	@: > compiled/$(am__dirstamp)
 
-compiled/test_sprite$(EXEEXT): $(compiled_test_sprite_OBJECTS) $(compiled_test_sprite_DEPENDENCIES) $(EXTRA_compiled_test_sprite_DEPENDENCIES) compiled/$(am__dirstamp)
-	@rm -f compiled/test_sprite$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(compiled_test_sprite_OBJECTS) $(compiled_test_sprite_LDADD) $(LIBS)
+compiled/test_keyboard$(EXEEXT): $(compiled_test_keyboard_OBJECTS) $(compiled_test_keyboard_DEPENDENCIES) $(EXTRA_compiled_test_keyboard_DEPENDENCIES) compiled/$(am__dirstamp)
+	@rm -f compiled/test_keyboard$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(compiled_test_keyboard_OBJECTS) $(compiled_test_keyboard_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -522,8 +525,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@../$(DEPDIR)/Sprite.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_sprite.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@../$(DEPDIR)/Keyboard.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_keyboard.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -740,9 +743,9 @@ recheck: all $(check_PROGRAMS)
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
-compiled/test_sprite.log: compiled/test_sprite$(EXEEXT)
-	@p='compiled/test_sprite$(EXEEXT)'; \
-	b='compiled/test_sprite'; \
+compiled/test_keyboard.log: compiled/test_keyboard$(EXEEXT)
+	@p='compiled/test_keyboard$(EXEEXT)'; \
+	b='compiled/test_keyboard'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -841,8 +844,8 @@ clean: clean-am
 clean-am: clean-checkPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ../$(DEPDIR)/Sprite.Po
-	-rm -f ./$(DEPDIR)/test_sprite.Po
+		-rm -f ../$(DEPDIR)/Keyboard.Po
+	-rm -f ./$(DEPDIR)/test_keyboard.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -888,8 +891,8 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ../$(DEPDIR)/Sprite.Po
-	-rm -f ./$(DEPDIR)/test_sprite.Po
+		-rm -f ../$(DEPDIR)/Keyboard.Po
+	-rm -f ./$(DEPDIR)/test_keyboard.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
