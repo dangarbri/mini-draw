@@ -16,14 +16,13 @@ AM_PROG_AR
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADER([SDL2/SDL.h], [], [AC_MSG_ERROR(Missing SDL.h Make sure SDL2 is installed.)])
-AC_CHECK_HEADER([SDL2/SDL_image.h], [], [AC_MSG_ERROR(Missing SDL_image.h Make sure SDL2_image is installed)])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
 # Checks for library functions.
 AC_CHECK_LIB([SDL2], [SDL_VideoInit], [], [AC_MSG_ERROR(Missing library SDL2)])
 AC_CHECK_LIB([SDL2_image], [IMG_LoadTexture], [], [AC_MSG_ERROR(Missing library SDL2_image)])
+AC_CHECK_LIB([SDL2_ttf], [TTF_Init], [], [AC_MSG_ERROR(Missing library SDL2_ttf)])
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile
