@@ -25,7 +25,7 @@ private:
     /**
      * Mapping of keys which stores whether or not they are pressed
      */
-    std::map<SDL_KeyCode, SDL_bool> _keys;
+    std::map<SDL_Keycode, SDL_bool> _keys;
 
 public:
     /**
@@ -46,7 +46,7 @@ public:
      * @param[in] key Key code to check
      * @returns true if the key is pressed, else false
      */
-    SDL_bool IsPressed(SDL_KeyCode key);
+    SDL_bool IsPressed(SDL_Keycode key);
 
     /**
      * Signal that a key is pressed.
@@ -55,7 +55,7 @@ public:
      *
      * @param[in] key Key that is being pressed
      */
-    void PressKey(SDL_KeyCode key);
+    void PressKey(SDL_Keycode key);
 
     /**
      * Signal that a key has been released
@@ -64,5 +64,5 @@ public:
      *
      * @param[in] key Key that has been released
      */
-    void ReleaseKey(SDL_KeyCode key);
+    void ReleaseKey(SDL_Keycode key);
 };

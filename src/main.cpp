@@ -13,7 +13,45 @@
 #include "ProgramState.h"
 #include "Image.h"
 #include "TextureCache.h"
+#include "Keyboard.h"
 #include "app.h"
+
+/**
+ * Handles SDL Keyboard events to update the keyboard state
+ * for the running application. 
+ */
+void handleKeyboardEvent(SDL_Event event) {
+    Keyboard* keyboard = Keyboard::getInstance();
+    switch (event.type) {
+        case SDL_KEYDOWN:
+            keyboard->PressKey(event.key.keysym.sym);
+            break;
+        case SDL_KEYUP:
+            keyboard->ReleaseKey(event.key.keysym.sym);
+            break;
+    }
+}
+
+/**
+ * Process incoming SDL_Events such as keyboard input
+ *
+ * @param[out] done Flag is set to true if SDL_QUIT is received
+ */
+void processEvents(SDL_bool* done) {
+    SDL_Event event;
+
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+            case SDL_QUIT:
+                *done = SDL_TRUE;
+                break;
+            case SDL_KEYDOWN:
+            case SDL_KEYUP:
+                handleKeyboardEvent(event);
+                break;
+        }
+    }
+}
 
 /**
  * @brief Main event loop
@@ -25,15 +63,7 @@
  * @param[out] done Boolean flag, set to true to signal the program to exit.
  */
 void tickFrame(SDL_Renderer* renderer, App* app, Uint32 dt, SDL_bool* done) {
-    SDL_Event event;
-
-    while (SDL_PollEvent(&event)) {
-        switch (event.type) {
-            case SDL_QUIT:
-                *done = SDL_TRUE;
-                break;
-        }
-    }
+    processEvents(done);
 
     SDL_RenderClear(renderer);
     app->OnUpdate(dt);

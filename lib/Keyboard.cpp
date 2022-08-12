@@ -19,7 +19,7 @@ Keyboard::~Keyboard() {
     }
 }
 
-SDL_bool Keyboard::IsPressed(SDL_KeyCode key) {
+SDL_bool Keyboard::IsPressed(SDL_Keycode key) {
     // First check if the key exists in the map
     auto key_in_mapping = _keys.find(key);
     if (key_in_mapping == _keys.end()) {
@@ -31,11 +31,11 @@ SDL_bool Keyboard::IsPressed(SDL_KeyCode key) {
     }
 }
 
-void Keyboard::PressKey(SDL_KeyCode key) {
+void Keyboard::PressKey(SDL_Keycode key) {
     _keys[key] = SDL_TRUE;
 }
 
-void Keyboard::ReleaseKey(SDL_KeyCode key) {
+void Keyboard::ReleaseKey(SDL_Keycode key) {
     _keys[key] = SDL_FALSE;
 }
 
