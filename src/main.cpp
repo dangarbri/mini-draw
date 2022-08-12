@@ -24,7 +24,7 @@
  * @param[in] app The core app logic handle
  * @param[out] done Boolean flag, set to true to signal the program to exit.
  */
-void tickFrame(SDL_Renderer* renderer, App* app, SDL_bool* done) {
+void tickFrame(SDL_Renderer* renderer, App* app, Uint32 dt, SDL_bool* done) {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
@@ -36,7 +36,7 @@ void tickFrame(SDL_Renderer* renderer, App* app, SDL_bool* done) {
     }
 
     SDL_RenderClear(renderer);
-    app->OnUpdate(1);
+    app->OnUpdate(dt);
     SDL_RenderPresent(renderer);
 }
 
@@ -92,8 +92,15 @@ int main() {
     app.OnStartup();
 
     SDL_bool done = SDL_FALSE;
+    Uint32 last_tick = SDL_GetTicks();
     while (!done) {
-        tickFrame(renderer, &app, &done);
+        // Calculate delta time for each frame
+        Uint32 now = SDL_GetTicks();
+        Uint32 dt = now - last_tick;
+        // Call the frame tick
+        tickFrame(renderer, &app, dt, &done);
+        // Update last tick time for dt calculation
+        last_tick = now;
     }
 
     // Shutdown the application code before shutting down SDL.

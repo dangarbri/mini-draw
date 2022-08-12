@@ -104,7 +104,8 @@ am__v_AR_0 = @echo "  AR      " $@;
 am__v_AR_1 = 
 libminidraw_a_AR = $(AR) $(ARFLAGS)
 libminidraw_a_LIBADD =
-am_libminidraw_a_OBJECTS = libminidraw_a-Image.$(OBJEXT) \
+am_libminidraw_a_OBJECTS = libminidraw_a-AnimatedImage.$(OBJEXT) \
+	libminidraw_a-Image.$(OBJEXT) \
 	libminidraw_a-ProgramState.$(OBJEXT) \
 	libminidraw_a-Sprite.$(OBJEXT) \
 	libminidraw_a-TextureCache.$(OBJEXT)
@@ -124,7 +125,8 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/libminidraw_a-Image.Po \
+am__depfiles_remade = ./$(DEPDIR)/libminidraw_a-AnimatedImage.Po \
+	./$(DEPDIR)/libminidraw_a-Image.Po \
 	./$(DEPDIR)/libminidraw_a-ProgramState.Po \
 	./$(DEPDIR)/libminidraw_a-Sprite.Po \
 	./$(DEPDIR)/libminidraw_a-TextureCache.Po
@@ -310,7 +312,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 noinst_LIBRARIES = libminidraw.a
-libminidraw_a_SOURCES = Image.cpp ProgramState.cpp Sprite.cpp TextureCache.cpp
+libminidraw_a_SOURCES = AnimatedImage.cpp Image.cpp ProgramState.cpp Sprite.cpp TextureCache.cpp
 libminidraw_a_CPPFLAGS = -I/usr/local/include/SDL2 -D_REENTRANT
 SUBDIRS = test
 all: all-recursive
@@ -361,6 +363,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-AnimatedImage.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-Image.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-ProgramState.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-Sprite.Po@am__quote@ # am--include-marker
@@ -385,6 +388,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+libminidraw_a-AnimatedImage.o: AnimatedImage.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminidraw_a-AnimatedImage.o -MD -MP -MF $(DEPDIR)/libminidraw_a-AnimatedImage.Tpo -c -o libminidraw_a-AnimatedImage.o `test -f 'AnimatedImage.cpp' || echo '$(srcdir)/'`AnimatedImage.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libminidraw_a-AnimatedImage.Tpo $(DEPDIR)/libminidraw_a-AnimatedImage.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='AnimatedImage.cpp' object='libminidraw_a-AnimatedImage.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libminidraw_a-AnimatedImage.o `test -f 'AnimatedImage.cpp' || echo '$(srcdir)/'`AnimatedImage.cpp
+
+libminidraw_a-AnimatedImage.obj: AnimatedImage.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminidraw_a-AnimatedImage.obj -MD -MP -MF $(DEPDIR)/libminidraw_a-AnimatedImage.Tpo -c -o libminidraw_a-AnimatedImage.obj `if test -f 'AnimatedImage.cpp'; then $(CYGPATH_W) 'AnimatedImage.cpp'; else $(CYGPATH_W) '$(srcdir)/AnimatedImage.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libminidraw_a-AnimatedImage.Tpo $(DEPDIR)/libminidraw_a-AnimatedImage.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='AnimatedImage.cpp' object='libminidraw_a-AnimatedImage.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libminidraw_a-AnimatedImage.obj `if test -f 'AnimatedImage.cpp'; then $(CYGPATH_W) 'AnimatedImage.cpp'; else $(CYGPATH_W) '$(srcdir)/AnimatedImage.cpp'; fi`
 
 libminidraw_a-Image.o: Image.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminidraw_a-Image.o -MD -MP -MF $(DEPDIR)/libminidraw_a-Image.Tpo -c -o libminidraw_a-Image.o `test -f 'Image.cpp' || echo '$(srcdir)/'`Image.cpp
@@ -638,7 +655,8 @@ clean: clean-recursive
 clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-recursive
-		-rm -f ./$(DEPDIR)/libminidraw_a-Image.Po
+		-rm -f ./$(DEPDIR)/libminidraw_a-AnimatedImage.Po
+	-rm -f ./$(DEPDIR)/libminidraw_a-Image.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-ProgramState.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-Sprite.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-TextureCache.Po
@@ -687,7 +705,8 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-		-rm -f ./$(DEPDIR)/libminidraw_a-Image.Po
+		-rm -f ./$(DEPDIR)/libminidraw_a-AnimatedImage.Po
+	-rm -f ./$(DEPDIR)/libminidraw_a-Image.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-ProgramState.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-Sprite.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-TextureCache.Po

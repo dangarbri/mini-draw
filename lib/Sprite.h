@@ -22,6 +22,13 @@
 class Sprite {
 public:
     /**
+     * Update function called each frame with the delta time
+     *
+     * @param[in] dt Time since last frame in milliseconds
+     */
+    virtual void Update(Uint32 dt) = 0;
+
+    /**
      * Draws the sprite to the screen
      */
     virtual void Draw() = 0;

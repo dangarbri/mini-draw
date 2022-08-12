@@ -46,7 +46,7 @@ public:
      *
      * @param[in] dt delta time since last frame (TODO)
      */
-    void OnUpdate(float dt);
+    void OnUpdate(Uint32 dt);
 
     /**
      * Executed before SDL has been shutdown, but the program is closing.

@@ -49,11 +49,18 @@ public:
     void Draw();
 
     /**
+     * Frame update function
+     *
+     * @param[in] dt Milliseconds since last frame
+     */
+    void Update(Uint32 dt);
+
+private:
+    /**
      * SDL Texture initialized via the constructor
      */
     SDL_Texture *texture = nullptr;
 
-private:
     /**
      * Targets a specific rectangle in the texture to render.
      * This is used for targeting a single sprite in a sprite sheet.

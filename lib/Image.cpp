@@ -21,7 +21,7 @@ Image::Image(const char* filename, SDL_Rect subsection) {
 
 void Image::Draw() {
     SDL_Rect srcRect = _GetRect();
-    SDL_Rect targetRect = Sprite::GetTargetRect();
+    SDL_Rect targetRect = GetTargetRect();
     int result = SDL_RenderCopy(ProgramState::GetRenderer(), texture, &srcRect, &targetRect);
     if (result < 0) {
         SDL_Log("Failed to render image: %s\n", SDL_GetError());
@@ -31,4 +31,6 @@ void Image::Draw() {
 SDL_Rect Image::_GetRect() {
     return _textureSubMap;
 }
+
+void Image::Update(Uint32 dt) {}
 
