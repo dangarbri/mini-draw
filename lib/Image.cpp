@@ -22,7 +22,7 @@ Image::Image(const char* filename, SDL_Rect subsection) {
 void Image::Draw() {
     SDL_Rect srcRect = _GetRect();
     SDL_Rect targetRect = Sprite::GetTargetRect();
-    int result = SDL_RenderCopy(ProgramState::GetRenderer(), texture, &srcRect, &targetRect);
+    int result = SDL_RenderCopyEx(ProgramState::GetRenderer(), texture, &srcRect, &targetRect, Sprite::GetRotation(), NULL, SDL_FLIP_NONE);
     if (result < 0) {
         SDL_Log("Failed to render image: %s\n", SDL_GetError());
     }

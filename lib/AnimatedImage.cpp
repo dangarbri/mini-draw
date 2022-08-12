@@ -34,6 +34,7 @@ void AnimatedImage::_UpdateImageSpriteInfo(Image* image) {
     }
     image->SetPosition(GetPosition());
     image->SetScale(GetScale());
+    image->SetRotation(GetRotation());
 }
 
 int AnimatedImage::_GetTargetFrame() {
