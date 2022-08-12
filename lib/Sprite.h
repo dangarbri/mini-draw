@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL.h"
+#include "Coordinates.h"
 
 /**
  * @page Sprites
@@ -20,6 +21,73 @@
  */
 class Sprite {
 public:
+    /**
+     * Draws the sprite to the screen
+     */
+    virtual void Draw() = 0;
+
+    /**
+     * Returns the target rectangle to render this sprite to.
+     */
+    SDL_Rect GetTargetRect();
+
+    /**
+     * Gets the coordinates of where the sprite is being rendered
+     */
+    Coordinates GetPosition();
+
+    /**
+     * Sets the coordinates for where to render the sprite
+     *
+     * @param[in] x horizontal position
+     * @param[in] y vertical position
+     */
+    void SetPosition(int x, int y);
+
+    /**
+     * Sets the coordinates for where to render the sprite
+     *
+     * @param[in] position Position coordinates
+     */
+    void SetPosition(Coordinates position);
+
+    /**
+     * Set the sprite width
+     *
+     * @param[in] width New sprite width
+     */
+    void SetWidth(int width);
+
+    /**
+     * Gets the sprite's width
+     */
+    int GetWidth();
+
+    /**
+     * Set the sprite height 
+     *
+     * @param[in] height New sprite height 
+     */
+    void SetHeight(int height);
+
+    /**
+     * Gets the sprite's height
+     */
+    int GetHeight();
+
+    /**
+     * Gets the sprite's scale
+     */
+    int GetScale();
+
+    /**
+     * Sets the sprite's scale
+     *
+     * @param[in] scale New sprite scale
+     */
+    void SetScale(int scale);
+
+protected:
     /**
      * Width of the sprite's target render box
      */
@@ -44,14 +112,4 @@ public:
      * Scale of the image to make it larger or smaller
      */
     int scale = 1;
-
-    /**
-     * Returns the target rectangle to render this sprite to.
-     */
-    SDL_Rect GetTargetRect();
-
-    /**
-     * Draws the sprite to the screen
-     */
-    virtual void Draw() = 0;
 };
