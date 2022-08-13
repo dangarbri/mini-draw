@@ -85,7 +85,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-check_PROGRAMS = compiled/test_cubic_bezier$(EXEEXT) \
+check_PROGRAMS = compiled/test_transition$(EXEEXT) \
+	compiled/test_cubic_bezier$(EXEEXT) \
 	compiled/test_scratchpad$(EXEEXT) \
 	compiled/test_font_cache$(EXEEXT) \
 	compiled/test_sprite$(EXEEXT) compiled/test_keyboard$(EXEEXT)
@@ -122,6 +123,11 @@ am_compiled_test_sprite_OBJECTS = test_sprite.$(OBJEXT) \
 	../Sprite.$(OBJEXT)
 compiled_test_sprite_OBJECTS = $(am_compiled_test_sprite_OBJECTS)
 compiled_test_sprite_LDADD = $(LDADD)
+am_compiled_test_transition_OBJECTS = test_transition.$(OBJEXT) \
+	../curve/CubicBezier.$(OBJEXT)
+compiled_test_transition_OBJECTS =  \
+	$(am_compiled_test_transition_OBJECTS)
+compiled_test_transition_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -142,7 +148,8 @@ am__depfiles_remade = ../$(DEPDIR)/FontCache.Po \
 	../curve/$(DEPDIR)/CubicBezier.Po \
 	./$(DEPDIR)/test_cubic_bezier.Po \
 	./$(DEPDIR)/test_font_cache.Po ./$(DEPDIR)/test_keyboard.Po \
-	./$(DEPDIR)/test_scratchpad.Po ./$(DEPDIR)/test_sprite.Po
+	./$(DEPDIR)/test_scratchpad.Po ./$(DEPDIR)/test_sprite.Po \
+	./$(DEPDIR)/test_transition.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -161,12 +168,14 @@ SOURCES = $(compiled_test_cubic_bezier_SOURCES) \
 	$(compiled_test_font_cache_SOURCES) \
 	$(compiled_test_keyboard_SOURCES) \
 	$(compiled_test_scratchpad_SOURCES) \
-	$(compiled_test_sprite_SOURCES)
+	$(compiled_test_sprite_SOURCES) \
+	$(compiled_test_transition_SOURCES)
 DIST_SOURCES = $(compiled_test_cubic_bezier_SOURCES) \
 	$(compiled_test_font_cache_SOURCES) \
 	$(compiled_test_keyboard_SOURCES) \
 	$(compiled_test_scratchpad_SOURCES) \
-	$(compiled_test_sprite_SOURCES)
+	$(compiled_test_sprite_SOURCES) \
+	$(compiled_test_transition_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -492,6 +501,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+compiled_test_transition_SOURCES = test_transition.cpp ../curve/CubicBezier.cpp
 compiled_test_cubic_bezier_SOURCES = test_cubic_bezier.cpp ../curve/CubicBezier.cpp
 compiled_test_scratchpad_SOURCES = test_scratchpad.cpp
 compiled_test_sprite_SOURCES = test_sprite.cpp ../Sprite.cpp
@@ -579,6 +589,10 @@ compiled/test_sprite$(EXEEXT): $(compiled_test_sprite_OBJECTS) $(compiled_test_s
 	@rm -f compiled/test_sprite$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(compiled_test_sprite_OBJECTS) $(compiled_test_sprite_LDADD) $(LIBS)
 
+compiled/test_transition$(EXEEXT): $(compiled_test_transition_OBJECTS) $(compiled_test_transition_DEPENDENCIES) $(EXTRA_compiled_test_transition_DEPENDENCIES) compiled/$(am__dirstamp)
+	@rm -f compiled/test_transition$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(compiled_test_transition_OBJECTS) $(compiled_test_transition_LDADD) $(LIBS)
+
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f ../*.$(OBJEXT)
@@ -596,6 +610,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_keyboard.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_scratchpad.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_sprite.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_transition.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -812,6 +827,13 @@ recheck: all $(check_PROGRAMS)
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
+compiled/test_transition.log: compiled/test_transition$(EXEEXT)
+	@p='compiled/test_transition$(EXEEXT)'; \
+	b='compiled/test_transition'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 compiled/test_cubic_bezier.log: compiled/test_cubic_bezier$(EXEEXT)
 	@p='compiled/test_cubic_bezier$(EXEEXT)'; \
 	b='compiled/test_cubic_bezier'; \
@@ -952,6 +974,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/test_keyboard.Po
 	-rm -f ./$(DEPDIR)/test_scratchpad.Po
 	-rm -f ./$(DEPDIR)/test_sprite.Po
+	-rm -f ./$(DEPDIR)/test_transition.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -1006,6 +1029,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/test_keyboard.Po
 	-rm -f ./$(DEPDIR)/test_scratchpad.Po
 	-rm -f ./$(DEPDIR)/test_sprite.Po
+	-rm -f ./$(DEPDIR)/test_transition.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
