@@ -27,6 +27,11 @@ public:
                                                              _duration(duration) {};
 
     /**
+     * Returns true if the transition is over.
+     */
+    SDL_bool IsDone();
+
+    /**
      * Update the field controlled by this transition
      *
      * @param[in] dt Milliseconds since last frame
@@ -56,12 +61,20 @@ private:
 
 template <typename T>
 void Transition<T>::Update(Uint32 dt) {
-    _current_time += dt;
-    float percent_complete = _current_time / _duration;
-    // Don't let the transition go past the endpoint.
-    if (percent_complete > 1) {
-        percent_complete = 1;
+    // Only continue the animation if there's still time remaining in it
+    if (_current_time < _duration) {
+        _current_time += dt;
+        float percent_complete = _current_time / _duration;
+        // Don't let the transition go past the endpoint.
+        if (percent_complete > 1) {
+            percent_complete = 1;
+        }
+        *_property = _curve.get(percent_complete);
     }
-    *_property = _curve.get(percent_complete);
+}
+
+template <typename T>
+SDL_bool Transition<T>::IsDone() {
+    return _current_time >= _duration ? SDL_TRUE : SDL_FALSE;
 }
 

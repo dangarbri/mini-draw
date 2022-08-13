@@ -8,11 +8,15 @@ int main () {
     // Define a curve that modified target over 1 second.
     Transition<float> transition {&target, CubicBezier{target, target + 33, target + 66, target + 100} ,1000};
     // Loop to simulate frames passing every 100ms
-    for (Uint32 i = 0; i < 2000; i += 100) {
+    for (Uint32 i = 0; i < 1000; i += 100) {
+        assert(transition.IsDone() == SDL_FALSE);
         transition.Update(100);
         // Log the value of target
         std::cout << "Target: " << target << std::endl;
     }
     assert(target == 110);
+    transition.Update(1000);
+    assert(target == 110);
+    assert(transition.IsDone());
 }
 
