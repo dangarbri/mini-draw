@@ -99,8 +99,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
+am__dirstamp = $(am__leading_dot)dirstamp
 am_another_game_attempt_OBJECTS = another_game_attempt-main.$(OBJEXT) \
-	another_game_attempt-app.$(OBJEXT)
+	another_game_attempt-app.$(OBJEXT) \
+	levels/another_game_attempt-introduction.$(OBJEXT)
 another_game_attempt_OBJECTS = $(am_another_game_attempt_OBJECTS)
 another_game_attempt_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
@@ -119,7 +121,8 @@ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/another_game_attempt-app.Po \
-	./$(DEPDIR)/another_game_attempt-main.Po
+	./$(DEPDIR)/another_game_attempt-main.Po \
+	levels/$(DEPDIR)/another_game_attempt-introduction.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -259,9 +262,10 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-another_game_attempt_SOURCES = main.cpp app.cpp
+another_game_attempt_SOURCES = main.cpp app.cpp levels/introduction.cpp
 another_game_attempt_CPPFLAGS = -I/usr/local/include/SDL2 -I/usr/include/SDL2 -D_REENTRANT -I../lib
 another_game_attempt_LDADD = -L../lib -lminidraw
+AUTOMAKE_OPTIONS = subdir-objects
 all: all-am
 
 .SUFFIXES:
@@ -337,6 +341,14 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+levels/$(am__dirstamp):
+	@$(MKDIR_P) levels
+	@: > levels/$(am__dirstamp)
+levels/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) levels/$(DEPDIR)
+	@: > levels/$(DEPDIR)/$(am__dirstamp)
+levels/another_game_attempt-introduction.$(OBJEXT):  \
+	levels/$(am__dirstamp) levels/$(DEPDIR)/$(am__dirstamp)
 
 another_game_attempt$(EXEEXT): $(another_game_attempt_OBJECTS) $(another_game_attempt_DEPENDENCIES) $(EXTRA_another_game_attempt_DEPENDENCIES) 
 	@rm -f another_game_attempt$(EXEEXT)
@@ -344,12 +356,14 @@ another_game_attempt$(EXEEXT): $(another_game_attempt_OBJECTS) $(another_game_at
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f levels/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/another_game_attempt-app.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/another_game_attempt-main.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@levels/$(DEPDIR)/another_game_attempt-introduction.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -358,15 +372,17 @@ $(am__depfiles_remade):
 am--depfiles: $(am__depfiles_remade)
 
 .cpp.o:
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ $<
 
 .cpp.obj:
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+@am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
@@ -398,6 +414,20 @@ another_game_attempt-app.obj: app.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='app.cpp' object='another_game_attempt-app.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(another_game_attempt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o another_game_attempt-app.obj `if test -f 'app.cpp'; then $(CYGPATH_W) 'app.cpp'; else $(CYGPATH_W) '$(srcdir)/app.cpp'; fi`
+
+levels/another_game_attempt-introduction.o: levels/introduction.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(another_game_attempt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT levels/another_game_attempt-introduction.o -MD -MP -MF levels/$(DEPDIR)/another_game_attempt-introduction.Tpo -c -o levels/another_game_attempt-introduction.o `test -f 'levels/introduction.cpp' || echo '$(srcdir)/'`levels/introduction.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) levels/$(DEPDIR)/another_game_attempt-introduction.Tpo levels/$(DEPDIR)/another_game_attempt-introduction.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='levels/introduction.cpp' object='levels/another_game_attempt-introduction.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(another_game_attempt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o levels/another_game_attempt-introduction.o `test -f 'levels/introduction.cpp' || echo '$(srcdir)/'`levels/introduction.cpp
+
+levels/another_game_attempt-introduction.obj: levels/introduction.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(another_game_attempt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT levels/another_game_attempt-introduction.obj -MD -MP -MF levels/$(DEPDIR)/another_game_attempt-introduction.Tpo -c -o levels/another_game_attempt-introduction.obj `if test -f 'levels/introduction.cpp'; then $(CYGPATH_W) 'levels/introduction.cpp'; else $(CYGPATH_W) '$(srcdir)/levels/introduction.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) levels/$(DEPDIR)/another_game_attempt-introduction.Tpo levels/$(DEPDIR)/another_game_attempt-introduction.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='levels/introduction.cpp' object='levels/another_game_attempt-introduction.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(another_game_attempt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o levels/another_game_attempt-introduction.obj `if test -f 'levels/introduction.cpp'; then $(CYGPATH_W) 'levels/introduction.cpp'; else $(CYGPATH_W) '$(srcdir)/levels/introduction.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -516,6 +546,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f levels/$(DEPDIR)/$(am__dirstamp)
+	-rm -f levels/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -527,6 +559,7 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/another_game_attempt-app.Po
 	-rm -f ./$(DEPDIR)/another_game_attempt-main.Po
+	-rm -f levels/$(DEPDIR)/another_game_attempt-introduction.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -574,6 +607,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/another_game_attempt-app.Po
 	-rm -f ./$(DEPDIR)/another_game_attempt-main.Po
+	-rm -f levels/$(DEPDIR)/another_game_attempt-introduction.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

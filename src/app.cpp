@@ -1,43 +1,54 @@
 #include "SDL.h"
 #include "app.h"
-#include "AnimatedImage.h"
-#include "Text.h"
-#include "AppBuilder/WASDMovement.h"
+#include "levels/introduction.h"
+
+enum GameState {
+    INTRODUCTION,
+    DONE
+};
 
 struct App::impl {
-    /** Define your app data here */
-    AnimatedImage* test;
-    WASDMovement* controller;
-    Text* text;
+    /** Define your app data and functions here */
+    Introduction* intro = nullptr;
+    enum GameState state = INTRODUCTION;
+
+    void UpdateIntro(Uint32 dt);
 };
 
 void App::OnStartup() {
     /** Put your initialization code here */
-    _impl->test = new AnimatedImage("assets/0x72_DungeonTilesetII_v1.4.png", SDL_Rect{128, 100, 16, 28}, 4);
-    _impl->test->SetFrameDelay(150);
-    _impl->test->SetPosition(120, 114);
-    _impl->test->SetRotation(270);
-    _impl->controller = new WASDMovement(_impl->test);
-    _impl->controller->Disable();
-    _impl->text = new Text("assets/fonts/BLKCHCRY.TTF", 24, "Hello World!");
-    Coordinates text_position = _impl->text->GetPosition();
-    text_position.x = 128 - (_impl->text->GetWidth() / 2);
-    _impl->text->SetPosition(text_position);
+    _impl->intro = new Introduction();
 }
 
 void App::OnUpdate(Uint32 dt) {
     /** Put your frame update code here */
-    _impl->controller->Update(dt);
-    _impl->test->Update(dt);
-    _impl->test->Draw();
-    _impl->text->Draw();
+    switch (_impl->state) {
+        case INTRODUCTION:
+            _impl->UpdateIntro(dt);
+            break;
+        case DONE:
+            break;
+    }
 }
 
 void App::OnShutdown() {
     /** Put your cleanup code here */
-    delete _impl->controller;
-    delete _impl->test;
-    delete _impl->text;
+    if (_impl->intro != nullptr) {
+        delete _impl->intro;
+    }
+}
+
+void App::impl::UpdateIntro(Uint32 dt) {
+    // Run the intro's update function
+    intro->Update(dt);
+    // Check if it's complete
+    if (intro->IsComplete()) {
+        // When it's complete, update the state and free
+        // resources from the intro
+        state = DONE;
+        delete intro;
+        intro = nullptr;
+    }
 }
 
 /**
