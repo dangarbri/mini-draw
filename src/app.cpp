@@ -37,6 +37,7 @@ void App::OnShutdown() {
     /** Put your cleanup code here */
     delete _impl->controller;
     delete _impl->test;
+    delete _impl->text;
 }
 
 /**
