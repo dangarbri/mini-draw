@@ -105,8 +105,8 @@ am__v_AR_1 =
 libminidraw_a_AR = $(AR) $(ARFLAGS)
 libminidraw_a_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_libminidraw_a_OBJECTS = libminidraw_a-Text.$(OBJEXT) \
-	libminidraw_a-FontCache.$(OBJEXT) \
+am_libminidraw_a_OBJECTS = curve/libminidraw_a-CubicBezier.$(OBJEXT) \
+	libminidraw_a-Text.$(OBJEXT) libminidraw_a-FontCache.$(OBJEXT) \
 	AppBuilder/libminidraw_a-WASDMovement.$(OBJEXT) \
 	libminidraw_a-Keyboard.$(OBJEXT) \
 	libminidraw_a-AnimatedImage.$(OBJEXT) \
@@ -138,7 +138,8 @@ am__depfiles_remade = ./$(DEPDIR)/libminidraw_a-AnimatedImage.Po \
 	./$(DEPDIR)/libminidraw_a-Sprite.Po \
 	./$(DEPDIR)/libminidraw_a-Text.Po \
 	./$(DEPDIR)/libminidraw_a-TextureCache.Po \
-	AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po
+	AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po \
+	curve/$(DEPDIR)/libminidraw_a-CubicBezier.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -321,7 +322,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 noinst_LIBRARIES = libminidraw.a
-libminidraw_a_SOURCES = Text.cpp FontCache.cpp AppBuilder/WASDMovement.cpp Keyboard.cpp AnimatedImage.cpp Image.cpp ProgramState.cpp Sprite.cpp TextureCache.cpp
+libminidraw_a_SOURCES = curve/CubicBezier.cpp Text.cpp FontCache.cpp AppBuilder/WASDMovement.cpp Keyboard.cpp AnimatedImage.cpp Image.cpp ProgramState.cpp Sprite.cpp TextureCache.cpp
 libminidraw_a_CPPFLAGS = -I/usr/local/include/SDL2 -I/usr/include/SDL2 -D_REENTRANT
 AUTOMAKE_OPTIONS = subdir-objects
 SUBDIRS = test
@@ -361,6 +362,14 @@ $(am__aclocal_m4_deps):
 
 clean-noinstLIBRARIES:
 	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+curve/$(am__dirstamp):
+	@$(MKDIR_P) curve
+	@: > curve/$(am__dirstamp)
+curve/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) curve/$(DEPDIR)
+	@: > curve/$(DEPDIR)/$(am__dirstamp)
+curve/libminidraw_a-CubicBezier.$(OBJEXT): curve/$(am__dirstamp) \
+	curve/$(DEPDIR)/$(am__dirstamp)
 AppBuilder/$(am__dirstamp):
 	@$(MKDIR_P) AppBuilder
 	@: > AppBuilder/$(am__dirstamp)
@@ -379,6 +388,7 @@ libminidraw.a: $(libminidraw_a_OBJECTS) $(libminidraw_a_DEPENDENCIES) $(EXTRA_li
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f AppBuilder/*.$(OBJEXT)
+	-rm -f curve/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -392,6 +402,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-Text.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libminidraw_a-TextureCache.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@curve/$(DEPDIR)/libminidraw_a-CubicBezier.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -414,6 +425,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+curve/libminidraw_a-CubicBezier.o: curve/CubicBezier.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT curve/libminidraw_a-CubicBezier.o -MD -MP -MF curve/$(DEPDIR)/libminidraw_a-CubicBezier.Tpo -c -o curve/libminidraw_a-CubicBezier.o `test -f 'curve/CubicBezier.cpp' || echo '$(srcdir)/'`curve/CubicBezier.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) curve/$(DEPDIR)/libminidraw_a-CubicBezier.Tpo curve/$(DEPDIR)/libminidraw_a-CubicBezier.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='curve/CubicBezier.cpp' object='curve/libminidraw_a-CubicBezier.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o curve/libminidraw_a-CubicBezier.o `test -f 'curve/CubicBezier.cpp' || echo '$(srcdir)/'`curve/CubicBezier.cpp
+
+curve/libminidraw_a-CubicBezier.obj: curve/CubicBezier.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT curve/libminidraw_a-CubicBezier.obj -MD -MP -MF curve/$(DEPDIR)/libminidraw_a-CubicBezier.Tpo -c -o curve/libminidraw_a-CubicBezier.obj `if test -f 'curve/CubicBezier.cpp'; then $(CYGPATH_W) 'curve/CubicBezier.cpp'; else $(CYGPATH_W) '$(srcdir)/curve/CubicBezier.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) curve/$(DEPDIR)/libminidraw_a-CubicBezier.Tpo curve/$(DEPDIR)/libminidraw_a-CubicBezier.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='curve/CubicBezier.cpp' object='curve/libminidraw_a-CubicBezier.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o curve/libminidraw_a-CubicBezier.obj `if test -f 'curve/CubicBezier.cpp'; then $(CYGPATH_W) 'curve/CubicBezier.cpp'; else $(CYGPATH_W) '$(srcdir)/curve/CubicBezier.cpp'; fi`
 
 libminidraw_a-Text.o: Text.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libminidraw_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libminidraw_a-Text.o -MD -MP -MF $(DEPDIR)/libminidraw_a-Text.Tpo -c -o libminidraw_a-Text.o `test -f 'Text.cpp' || echo '$(srcdir)/'`Text.cpp
@@ -730,6 +755,8 @@ distclean-generic:
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
 	-rm -f AppBuilder/$(DEPDIR)/$(am__dirstamp)
 	-rm -f AppBuilder/$(am__dirstamp)
+	-rm -f curve/$(DEPDIR)/$(am__dirstamp)
+	-rm -f curve/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -748,6 +775,7 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/libminidraw_a-Text.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-TextureCache.Po
 	-rm -f AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po
+	-rm -f curve/$(DEPDIR)/libminidraw_a-CubicBezier.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -802,6 +830,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/libminidraw_a-Text.Po
 	-rm -f ./$(DEPDIR)/libminidraw_a-TextureCache.Po
 	-rm -f AppBuilder/$(DEPDIR)/libminidraw_a-WASDMovement.Po
+	-rm -f curve/$(DEPDIR)/libminidraw_a-CubicBezier.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
