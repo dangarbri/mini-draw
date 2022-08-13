@@ -58,6 +58,10 @@ template <typename T>
 void Transition<T>::Update(Uint32 dt) {
     _current_time += dt;
     float percent_complete = _current_time / _duration;
+    // Don't let the transition go past the endpoint.
+    if (percent_complete > 1) {
+        percent_complete = 1;
+    }
     *_property = _curve.get(percent_complete);
 }
 
